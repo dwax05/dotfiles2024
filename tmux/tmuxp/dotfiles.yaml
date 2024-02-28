@@ -1,0 +1,18 @@
+session_name: dotfiles
+start_directory: $HOME/.config
+
+windows:
+  - window_name: lvim dotfiles
+    layout: tiled
+    panes:
+      - lvim
+  - window_name: terms
+    layout: tiled
+    panes:
+      - 
+  - window_name: example
+    layout: tiled
+    panes:
+      - shell_command:
+          - ls
+          - ls -lah

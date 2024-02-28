@@ -1,0 +1,135 @@
+#!/bin/sh
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d" && EDITOR='nvim'
+# [ -x "$(command -v lvim)" ] && alias vim="lvim" vimdiff="lvim -d" && EDITOR='lvim'
+
+# sudo not required for some system commands
+
+for command in yum mount umount sv dnf snap updatedb su shutdown poweroff reboot; do
+	alias $command="sudo $command"
+done
+unset command
+
+se() {
+	choice="$(find $HOME/.local/bin -mindepth 1 -printf '%P\n' | fzf --preview='bat -n --color=always ~/.local/bin/{}')"
+	[ -f "$HOME/.local/bin/$choice" ] && $EDITOR "$HOME/.local/bin/$choice"
+}
+
+rssh() {
+	host=$(grep ^Host ~/.ssh/config | awk '{print $2}' | fzf)
+	ssh $host
+}
+
+share() {
+	choice="$(du -a $HOME/.local/bin | awk '{print $2}' | fzf)"
+	[ -f "$choice" ] && link=$(curl -sF "file=@$choice" https://0x0.st)
+	wl-copy $link
+	echo $link
+}
+
+ltxtmplts="$HOME/tmplts/ltx"
+newltx() {
+	mkdir -p "$@"
+	cd "$1"
+	cp $ltxtmplts/preamble.tex $ltxtmplts/template.tex .
+}
+
+wgitc() {
+	git clone git@waxonwaxoff.xyz:~/$1
+}
+
+mkcd() {
+	mkdir -p "$@"
+	cd "$1"
+}
+
+fcd() {
+	cd "$(find -type d | fzf)"
+}
+
+ctex() {
+	mv *.{aux,fdb_latexmk,fls,log,gz} logs
+}
+
+getpath() {
+	find -type f | fzf | sed 's/^..//g' | tr -d '\n' | wl-copy
+}
+
+open() {
+	xdg-open "$(find -type f | fzf)"
+}
+
+savewall() {
+	cp "$(cat $HOME/.cache/wallpaper)" "$HOME/.local/wallpapers/saved"
+}
+
+e() {
+	if [[ -n $1 ]]; then
+		file=$(fd --type file . $1 | fzf --preview="bat -n --color=always {}")
+	else
+		file=$(fd --type file | fzf --preview="bat -n --color=always {}")
+	fi
+	[[ -n $file ]] && $EDITOR $file
+}
+
+randcolor() {
+	case $(echo "1\n2\n3" | shuf -n1) in
+	1)
+		colorscript -r
+		;;
+	2)
+		pokemon-colorscripts -r --no-title
+		;;
+	3)
+		cowsay "$(fortune)"
+		;;
+	esac
+}
+
+greet() {
+	reminders show-all
+}
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	less="less -r" \
+	mkd="mkdir -pv"
+
+# Colorize commands when possible.
+alias \
+	ls="eza --group-directories-first" \
+	grep="grep --color=auto" \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi" \
+	cat="bat -p"
+
+# These common commands are just too long! Abbreviate them.
+alias \
+	ka="killall" \
+	g="git" \
+	lg="lazygit" \
+	sdn="shutdown -h now" \
+	v="$EDITOR" \
+	z="zoxide"
+
+alias \
+	gitc="git clone"
+
+# fzf stuff
+alias \
+	pf='fzf --preview="bat -n --color=always {}"'
+
+alias \
+	ll="eza -l --group-directories-first" \
+	la="eza -Ga --group-directories-first" \
+	lla="eza -la --group-directories-first" \
+	lt="eza -lT --group-directories-first" \
+	lta="eza -lTa --group-directories-first"
+
+# yt-dlp easy things
+alias \
+	yt-dlp-mp4="yt-dlp -S res,ext:mp4:m4a"
