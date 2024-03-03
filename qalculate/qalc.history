@@ -8,3 +8,25 @@ ls
 f(x) = 2x + 4
 y = 2x + 4
 dy/dx
+integral of 2x+3
+integrate(2x+3)
+integrate(2x+3) from 2 to 3
+integrate(2x+3) 
+f(x) = integrate(2x+3)
+integrate(sin2x)
+integrate(2sin2x)
+integrate(2sinx)
+integrate(-sinx)
+integrate(arcsinx/sqrt(1^2 - x^2))
+integrate(arcsinx/sqrt(1^2 + x^2))
+integrate(arcsinx/sqrt(1^2 + x^2))dx
+integrate(arcsinx/sqrt(1 - x^2))
+integrate(arcsinx/sqrt(1 - x^2))dx
+integrate(sin^-1(x)/sqrt(1 - x^2))
+integrate()
+integrate(arcsin(x)/sqrt(1 - x^2))
+∫2xdx
+∫2x
+∫(0, 1, 2x,dx)
+∫(0, 1, 2x)
+∫(2x)

@@ -3,7 +3,7 @@ add_newline = true
 
 # Order of modules on prompt
 format = """
- $all 
+ $all
 """
 right_format = """$time"""
 
@@ -77,7 +77,7 @@ right_format = """$time"""
 # Generic prompt configurations
 
 [character]
-success_symbol = "[  ](fg:#929b78)[  ](fg:#929b78) "
+success_symbol = "[ ](fg:#929b78)[  ](fg:#929b78) "
 error_symbol =   "[  ](fg:#d56767)[  ](fg:#d56767) "
 # 
 
@@ -98,7 +98,7 @@ symbol = " "
 # format = '[[](bg:#EC912D fg:#464347)$symbol$profile(\($region\))[](bg:#464347 fg:#EC912D)]($style)'
 
 [battery]
-disabled = true 
+disabled = true
 full_symbol = ""
 charging_symbol = " "
 discharging_symbol = " "
@@ -127,7 +127,7 @@ symbol = "喝"
 # disabled = true
 # style = "bg:#464347 fg:#FBDE2D"
 min_time = 2_000
-show_milliseconds = false 
+show_milliseconds = false
 show_notifications = false
 min_time_to_notify = 45_000
 # format = "[ 祥$duration]($style)"
@@ -321,7 +321,7 @@ symbol = "☸︎"
 # format = '[[](bg:#3371E3 fg:#464347)$symbol$context(\($namespace\))[](bg:#464347 fg:#3371E3)]($style)'
 
 [memory_usage]
-disabled = true 
+disabled = true
 symbol = " "
 # style = "bg:#BBBBBB fg:#111111"
 threshold = 75
